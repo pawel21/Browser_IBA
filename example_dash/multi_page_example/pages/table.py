@@ -1,7 +1,6 @@
-import dash
-from dash import html, dcc, Input, Output
 import pandas as pd
-import plotly.express as px
+import dash
+from dash import html, dcc, callback, Input, Output
 
 data = {
     'ptak_nr': [101, 102, 103, 104],
@@ -21,13 +20,9 @@ data = {
 
 df = pd.DataFrame(data)
 
-# df = pd.read_excel("../../przydzielanie kryteriow.xls")
+dash.register_page(__name__)
 
-# Inicjalizacja aplikacji Dash
-app = dash.Dash(__name__)
-
-# Layout aplikacji, wprowadzanie Dropdown do filtrowania i wyświetlenie tabeli
-app.layout = html.Div([
+layout = html.Div([
     html.H1("Filtracja danych o ptakach"),
     html.Label("Wybierz nazwę ostoi:"),
     dcc.Dropdown(
@@ -54,7 +49,7 @@ app.layout = html.Div([
 
 
 # Callback do aktualizacji danych w tabeli
-@app.callback(
+@callback(
     Output('tabela_div', 'children'),
     [Input('nazwa_ostoi_dropdown', 'value'),
      Input('nazwa_polska_dropdown', 'value'),
@@ -76,7 +71,3 @@ def update_table(selected_nazwa_ostoi, selected_nazwa_polska, selected_rok):
             columns=[{'name': i, 'id': i} for i in filtered_df.columns]
         )
     ])
-
-# Uruchomienie serwera
-if __name__ == '__main__':
-    app.run_server(debug=True)
