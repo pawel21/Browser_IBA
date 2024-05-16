@@ -19,9 +19,9 @@ data = {
     'aktualne': [True, True, True, True]
 }
 
-df = pd.DataFrame(data)
+# df = pd.DataFrame(data)
 
-# df = pd.read_excel("../../przydzielanie kryteriow.xls")
+df = pd.read_excel("../../przydzielanie kryteriow.xls")
 
 # Inicjalizacja aplikacji Dash
 app = dash.Dash(__name__)
