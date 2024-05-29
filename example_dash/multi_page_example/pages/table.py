@@ -20,6 +20,9 @@ data = {
 
 df = pd.DataFrame(data)
 
+#df = pd.read_excel("../../../przydzielanie kryteriow.xls")
+df = pd.read_excel("../../../df_test.xlsx")
+
 dash.register_page(__name__)
 
 layout = html.Div([
@@ -39,7 +42,7 @@ layout = html.Div([
     html.Label("Wybierz rok:"),
     dcc.Dropdown(
         id='rok_dropdown',
-        options=[{'label': i, 'value': i} for i in df['rok'].unique()],
+        options=["Nie dostępne jeszcze"],
         multi=True
     ),
     html.Div(id='tabela_div')
